@@ -12,7 +12,7 @@ int main() {
   c.start();
   float currentTime = 0.0f;
 
-  Ball ball(&window, Vector2D(300, 300), Vector2D(1.0f, 1.0f), 100.0f);
+  Ball ball(&window, Vector2D(300.0f, 702.0f), Vector2D(0.5f, 0.5f), 200.0f);
 
   while (window.isOpen()) {
     sf::Event e;
