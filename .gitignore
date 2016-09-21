@@ -5,7 +5,14 @@
 *.suo
 *.user
 *.userosscache
+*.sln
 *.sln.docstates
+*.vcxproj
+*.vcxproj.filters
+
+*.bat
+genie.exe
+project_settings.lua
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
@@ -21,6 +28,7 @@ bld/
 [Bb]in/
 [Oo]bj/
 [Ll]og/
+dependencies/
 
 # Visual Studio 2015 cache/options directory
 .vs/
