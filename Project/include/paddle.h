@@ -1,5 +1,5 @@
-#ifndef __BALL_H__
-#define __BALL_H__
+#ifndef __PADDLE_H__
+#define __PADDLE_H__
 
 #include <SFML/Graphics/Image.hpp>
 #include <SFML/Graphics/RenderWindow.hpp>
@@ -8,24 +8,24 @@
 
 #include "vectors.h"
 
-class Ball {
+class Paddle {
 public:
 
-  Ball();
-  Ball(sf::RenderWindow *window, const Vector2D &position, 
-    const Vector2D &velocity, float speed);
-  ~Ball();
+  Paddle();
+  Paddle(sf::RenderWindow *window);
+  ~Paddle();
 
   void update(float dt);
-  void draw();  // Get ref to window
+  void draw();
 
 private:
-  float m_speed;
+  
+  float m_yPos;
+  float m_halfWidth;
   sf::RenderWindow *m_windowRef;
   Vector2D m_position;
-  Vector2D m_velocity;
   sf::Texture m_texture;
   sf::Sprite m_sprite;
 };
 
-#endif // __BALL_H__
+#endif // __PADDLE_H__

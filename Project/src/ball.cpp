@@ -1,23 +1,30 @@
 #include "ball.h"
 
+#include <cassert>
+
 Ball::Ball() {
   m_speed = 0.0f;
   m_windowRef = nullptr;
 }
 
-Ball::Ball(sf::RenderWindow *window, Vector2D position, 
-  Vector2D velocity, float speed) {
+Ball::Ball(sf::RenderWindow *window, const Vector2D &position, 
+  const Vector2D &velocity, float speed) {
+  Ball();
+  
   m_windowRef = window;
   m_position = position;
   m_velocity = velocity;
   m_speed = speed;
 
   sf::Image image;
-  image.loadFromFile("resources/ball_basic1.png");
+  bool success = image.loadFromFile("resources/ball_basic1.png");
   //sf::Vector2u imageSize = image.getSize();
+
+  assert(success == true && "Failed to load ball texture");
 
   m_texture.loadFromImage(image);
   m_sprite.setTexture(m_texture);
+
   m_sprite.setPosition(sf::Vector2f(m_position.x, m_position.y));
 }
 
