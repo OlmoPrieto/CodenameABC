@@ -2,6 +2,8 @@
 
 #include <SFML/Window/Mouse.hpp>
 
+#include <iostream>
+
 GameManager* GameManager::m_instance = nullptr;
 
 GameManager::GameManager() {

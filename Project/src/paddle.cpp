@@ -3,6 +3,7 @@
 #include "game_manager.h"
 
 #include <cassert>
+#include <iostream>
 
 Paddle::Paddle() {
   m_yPos = 0.0f;

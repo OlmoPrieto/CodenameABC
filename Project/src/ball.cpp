@@ -1,6 +1,7 @@
 #include "ball.h"
 
 #include <cassert>
+#include <iostream>
 
 Ball::Ball() {
   m_speed = 0.0f;
