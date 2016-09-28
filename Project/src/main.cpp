@@ -19,6 +19,9 @@ int main() {
   Ball ball(&window, Vector2D(300.0f, 300.0f), Vector2D(0.5f, 0.5f), 200.0f);
   Paddle paddle(&window);
 
+  GameManager::getInstance()->setBallRef(&ball);
+  GameManager::getInstance()->setPaddleRef(&paddle);
+
   while (window.isOpen()) {
     sf::Event e;
     while (window.pollEvent(e)) {

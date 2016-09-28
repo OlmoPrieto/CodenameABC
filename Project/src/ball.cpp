@@ -1,11 +1,14 @@
 #include "ball.h"
 
+#include "game_manager.h"
+
 #include <cassert>
 #include <iostream>
 
 Ball::Ball() {
   m_speed = 0.0f;
   m_windowRef = nullptr;
+  m_paddleRef = nullptr;
 }
 
 Ball::Ball(sf::RenderWindow *window, const Vector2D &position, 
@@ -13,6 +16,7 @@ Ball::Ball(sf::RenderWindow *window, const Vector2D &position,
   Ball();
   
   m_windowRef = window;
+  m_paddleRef = GameManager::getInstance()->getPaddleRef();
   m_position = position;
   m_velocity = velocity;
   m_speed = speed;
@@ -34,15 +38,27 @@ Ball::~Ball() {
 }
 
 void Ball::update(float dt) {
+  Paddle *paddle = GameManager::getInstance()->getPaddleRef();
+  if (m_position.y > paddle->getYPos() - paddle->getHeight() * 2) {
+    
+  }
+
   Vector2D lastPosition = m_position;
   m_position = m_position + (m_velocity * m_speed * dt);
 
+  bool bounced = false;
   sf::Vector2u windowSize = m_windowRef->getSize();
   if (m_position.x > (windowSize.x - m_sprite.getLocalBounds().width) || m_position.x < 0.0f) {
     m_velocity.x *= -1.0f;
+    bounced = true;
   }
   if (m_position.y > (windowSize.y - m_sprite.getLocalBounds().height) || m_position.y < 0.0f) {
     m_velocity.y *= -1.0f;
+    bounced = true;
+  }
+
+  if (bounced == true) {
+    m_speed *= 1.0025f;  // this increases speed when bouncing in ANY case, change this
   }
 
   m_sprite.setPosition(sf::Vector2f(m_position.x, m_position.y));

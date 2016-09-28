@@ -15,6 +15,10 @@ public:
   Paddle(sf::RenderWindow *window);
   ~Paddle();
 
+  float getYPos() const;
+  uint32 getWidth() const;
+  uint32 getHeight() const;
+
   void update(float dt);
   void draw();
 

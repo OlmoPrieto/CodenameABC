@@ -36,6 +36,18 @@ Paddle::~Paddle() {
 
 }
 
+float Paddle::getYPos() const {
+  return m_yPos;
+}
+
+uint32 Paddle::getWidth() const {
+  return (m_sprite.getLocalBounds().width);
+}
+
+uint32 Paddle::getHeight() const {
+  return (m_sprite.getLocalBounds().height);
+}
+
 void Paddle::update(float dt) {
   m_position = GameManager::getInstance()->mousePos();
   m_position.y = m_yPos;

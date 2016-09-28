@@ -7,7 +7,9 @@
 GameManager* GameManager::m_instance = nullptr;
 
 GameManager::GameManager() {
-  
+  m_windowRef = nullptr;
+  m_paddleRef = nullptr;
+  m_ballRef = nullptr;
 }
 
 GameManager::~GameManager() {
@@ -26,6 +28,26 @@ GameManager* GameManager::getInstance() {
 
 void GameManager::setWindowRef(sf::RenderWindow *window) {
   m_windowRef = window;
+}
+
+void GameManager::setPaddleRef(Paddle *paddle) {
+  m_paddleRef = paddle;
+}
+
+void GameManager::setBallRef(Ball *ball) {
+  m_ballRef = ball;
+}
+
+sf::RenderWindow* GameManager::getWindowRef() const {
+  return m_windowRef;
+}
+
+Paddle* GameManager::getPaddleRef() const {
+  return m_paddleRef;
+}
+
+Ball* GameManager::getBallRef() const {
+  return m_ballRef;
 }
 
 Vector2D GameManager::mousePos() {
