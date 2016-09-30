@@ -29,6 +29,7 @@ Ball::Ball(sf::RenderWindow *window, const Vector2D &position,
 
   m_texture.loadFromImage(image);
   m_sprite.setTexture(m_texture);
+  m_sprite.setScale(sf::Vector2f(1.5f, 1.5f));
 
   m_sprite.setPosition(sf::Vector2f(m_position.x, m_position.y));
 }
@@ -48,11 +49,11 @@ void Ball::update(float dt) {
 
   bool bounced = false;
   sf::Vector2u windowSize = m_windowRef->getSize();
-  if (m_position.x > (windowSize.x - m_sprite.getLocalBounds().width) || m_position.x < 0.0f) {
+  if (m_position.x > (windowSize.x - m_sprite.getGlobalBounds().width) || m_position.x < 0.0f) {
     m_velocity.x *= -1.0f;
     bounced = true;
   }
-  if (m_position.y > (windowSize.y - m_sprite.getLocalBounds().height) || m_position.y < 0.0f) {
+  if (m_position.y >(windowSize.y - m_sprite.getGlobalBounds().height) || m_position.y < 0.0f) {
     m_velocity.y *= -1.0f;
     bounced = true;
   }

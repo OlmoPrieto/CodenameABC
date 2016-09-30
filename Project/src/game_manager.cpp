@@ -50,6 +50,14 @@ Ball* GameManager::getBallRef() const {
   return m_ballRef;
 }
 
+uint32 GameManager::getWindowWidth() const {
+  return (m_windowRef->getSize().x);
+}
+
+uint32 GameManager::getWindowHeight() const {
+  return (m_windowRef->getSize().y);
+}
+
 Vector2D GameManager::mousePos() {
   // maybe update it only each few milliseconds with a chrono
   sf::Vector2i mousePos = sf::Mouse::getPosition(*m_windowRef);

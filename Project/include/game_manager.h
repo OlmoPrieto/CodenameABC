@@ -19,6 +19,8 @@ public:
   sf::RenderWindow* getWindowRef() const;
   Paddle* getPaddleRef() const;
   Ball* getBallRef() const;
+  uint32 getWindowWidth() const;
+  uint32 getWindowHeight() const;
 
   Vector2D mousePos();
 
