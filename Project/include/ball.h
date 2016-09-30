@@ -1,13 +1,14 @@
 #ifndef __BALL_H__
 #define __BALL_H__
 
-#include "paddle.h"
 #include "vectors.h"
 
 #include <SFML/Graphics/Image.hpp>
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Graphics/Sprite.hpp>
 #include <SFML/Graphics/Texture.hpp>
+
+class Paddle;
 
 class Ball {
 public:
@@ -16,6 +17,10 @@ public:
   Ball(sf::RenderWindow *window, const Vector2D &position, 
     const Vector2D &velocity, float speed);
   ~Ball();
+
+  Vector2D getPosition() const;
+  uint32 getWidth() const;
+  uint32 getHeight() const;
 
   void update(float dt);
   void draw();  // Get ref to window

@@ -10,6 +10,7 @@ GameManager::GameManager() {
   m_windowRef = nullptr;
   m_paddleRef = nullptr;
   m_ballRef = nullptr;
+  m_spritesScaleFactor = 1.5f;
 }
 
 GameManager::~GameManager() {
@@ -56,6 +57,10 @@ uint32 GameManager::getWindowWidth() const {
 
 uint32 GameManager::getWindowHeight() const {
   return (m_windowRef->getSize().y);
+}
+
+float GameManager::getSpritesScaleFactor() const {
+  return m_spritesScaleFactor;
 }
 
 Vector2D GameManager::mousePos() {

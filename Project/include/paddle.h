@@ -1,12 +1,14 @@
 #ifndef __PADDLE_H__
 #define __PADDLE_H__
 
+#include "vectors.h"
+
 #include <SFML/Graphics/Image.hpp>
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Graphics/Sprite.hpp>
 #include <SFML/Graphics/Texture.hpp>
 
-#include "vectors.h"
+class Ball;
 
 class Paddle {
 public:
@@ -18,6 +20,8 @@ public:
   float getYPos() const;
   uint32 getWidth() const;
   uint32 getHeight() const;
+
+  bool checkCollision(Ball *ball);
 
   void update(float dt);
   void draw();

@@ -1,6 +1,7 @@
 #include "ball.h"
 
 #include "game_manager.h"
+#include "paddle.h"
 
 #include <cassert>
 #include <iostream>
@@ -15,8 +16,10 @@ Ball::Ball(sf::RenderWindow *window, const Vector2D &position,
   const Vector2D &velocity, float speed) {
   Ball();
   
+  GameManager *gm = GameManager::getInstance();
+
   m_windowRef = window;
-  m_paddleRef = GameManager::getInstance()->getPaddleRef();
+  m_paddleRef = gm->getPaddleRef();
   m_position = position;
   m_velocity = velocity;
   m_speed = speed;
@@ -29,7 +32,8 @@ Ball::Ball(sf::RenderWindow *window, const Vector2D &position,
 
   m_texture.loadFromImage(image);
   m_sprite.setTexture(m_texture);
-  m_sprite.setScale(sf::Vector2f(1.5f, 1.5f));
+  m_sprite.setScale(sf::Vector2f(gm->getSpritesScaleFactor(), 
+    gm->getSpritesScaleFactor()));
 
   m_sprite.setPosition(sf::Vector2f(m_position.x, m_position.y));
 }
@@ -38,28 +42,48 @@ Ball::~Ball() {
 
 }
 
+Vector2D Ball::getPosition() const {
+  return m_position;
+}
+
+uint32 Ball::getWidth() const {
+  return (m_sprite.getGlobalBounds().width);
+}
+
+uint32 Ball::getHeight() const {
+  return (m_sprite.getGlobalBounds().height);
+}
+
 void Ball::update(float dt) {
   Paddle *paddle = GameManager::getInstance()->getPaddleRef();
-  if (m_position.y > paddle->getYPos() - paddle->getHeight() * 2) {
-    
-  }
-
+  
   Vector2D lastPosition = m_position;
   m_position = m_position + (m_velocity * m_speed * dt);
 
   bool bounced = false;
+  if (m_position.y > paddle->getYPos() - paddle->getHeight() * 2) {
+    bool collided = paddle->checkCollision(this);
+
+    if (collided == true) {
+      bounced = true;
+      m_velocity = m_velocity * -1.0f;
+      //m_velocity.y *= -1.0f;
+    }
+  }
+
   sf::Vector2u windowSize = m_windowRef->getSize();
   if (m_position.x > (windowSize.x - m_sprite.getGlobalBounds().width) || m_position.x < 0.0f) {
     m_velocity.x *= -1.0f;
-    bounced = true;
+    //bounced = true;
   }
   if (m_position.y >(windowSize.y - m_sprite.getGlobalBounds().height) || m_position.y < 0.0f) {
     m_velocity.y *= -1.0f;
-    bounced = true;
+    //bounced = true;
   }
 
   if (bounced == true) {
-    m_speed *= 1.0025f;  // this increases speed when bouncing in ANY case, change this
+    m_position = lastPosition;
+    m_speed *= 1.005f;  // this increases speed when bouncing in ANY case, change this
   }
 
   m_sprite.setPosition(sf::Vector2f(m_position.x, m_position.y));
