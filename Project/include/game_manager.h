@@ -21,7 +21,7 @@ public:
   Ball* getBallRef() const;
   uint32 getWindowWidth() const;
   uint32 getWindowHeight() const;
-  float getSpritesScaleFactor() const;
+  Vector2D getSpritesScaleFactor() const;
 
   Vector2D mousePos();
 
@@ -34,7 +34,7 @@ private:
   sf::RenderWindow *m_windowRef;
   Paddle *m_paddleRef;
   Ball *m_ballRef;
-  float m_spritesScaleFactor;
+  Vector2D m_spritesScaleFactor;
 };
 
 #endif // __GAME_MANAGER_H__

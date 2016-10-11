@@ -7,19 +7,13 @@
 #include <iostream>
 
 Paddle::Paddle() {
-  m_yPos = 0.0f;
-  m_halfWidth = 0.0f;
-  m_windowRef = nullptr;
-}
-
-Paddle::Paddle(sf::RenderWindow *window) {
-  Paddle();
   
   GameManager *gm = GameManager::getInstance();
 
   m_yPos = gm->getWindowHeight() * 0.9f;
+  
   //m_yPos = 688.0f;
-  m_windowRef = window;
+  m_windowRef = gm->getWindowRef();
   //m_position = position;
   m_position.x = (float)(640 / 2);
   m_position.y = m_yPos;
@@ -31,11 +25,11 @@ Paddle::Paddle(sf::RenderWindow *window) {
 
   m_texture.loadFromImage(image);
   m_sprite.setTexture(m_texture);
-  m_sprite.setScale(sf::Vector2f(gm->getSpritesScaleFactor(), 
-    gm->getSpritesScaleFactor()));
+  m_sprite.setScale(sf::Vector2f(gm->getSpritesScaleFactor().x, 
+    gm->getSpritesScaleFactor().y));
 
   m_sprite.setPosition(sf::Vector2f(m_position.x, m_position.y));
-
+  
   m_halfWidth = m_sprite.getGlobalBounds().width / 2.0f;
 }
 

@@ -14,7 +14,6 @@ class Paddle {
 public:
 
   Paddle();
-  Paddle(sf::RenderWindow *window);
   ~Paddle();
 
   float getYPos() const;

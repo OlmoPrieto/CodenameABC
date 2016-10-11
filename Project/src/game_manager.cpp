@@ -10,7 +10,7 @@ GameManager::GameManager() {
   m_windowRef = nullptr;
   m_paddleRef = nullptr;
   m_ballRef = nullptr;
-  m_spritesScaleFactor = 1.5f;
+  m_spritesScaleFactor = Vector2D(1.5f, 1.5f);
 }
 
 GameManager::~GameManager() {
@@ -59,7 +59,7 @@ uint32 GameManager::getWindowHeight() const {
   return (m_windowRef->getSize().y);
 }
 
-float GameManager::getSpritesScaleFactor() const {
+Vector2D GameManager::getSpritesScaleFactor() const {
   return m_spritesScaleFactor;
 }
 

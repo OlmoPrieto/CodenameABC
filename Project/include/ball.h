@@ -13,8 +13,7 @@ class Paddle;
 class Ball {
 public:
 
-  Ball();
-  Ball(sf::RenderWindow *window, const Vector2D &position, 
+  Ball(const Vector2D &position, 
     const Vector2D &velocity, float speed);
   ~Ball();
 
@@ -26,6 +25,8 @@ public:
   void draw();  // Get ref to window
 
 private:
+  Ball();
+
   float m_speed;
   sf::RenderWindow *m_windowRef;
   Paddle* m_paddleRef;

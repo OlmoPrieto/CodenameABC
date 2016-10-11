@@ -12,13 +12,13 @@ Ball::Ball() {
   m_paddleRef = nullptr;
 }
 
-Ball::Ball(sf::RenderWindow *window, const Vector2D &position, 
+Ball::Ball(const Vector2D &position, 
   const Vector2D &velocity, float speed) {
   Ball();
   
   GameManager *gm = GameManager::getInstance();
 
-  m_windowRef = window;
+  m_windowRef = gm->getWindowRef();
   m_paddleRef = gm->getPaddleRef();
   m_position = position;
   m_velocity = velocity;
@@ -32,8 +32,8 @@ Ball::Ball(sf::RenderWindow *window, const Vector2D &position,
 
   m_texture.loadFromImage(image);
   m_sprite.setTexture(m_texture);
-  m_sprite.setScale(sf::Vector2f(gm->getSpritesScaleFactor(), 
-    gm->getSpritesScaleFactor()));
+  m_sprite.setScale(sf::Vector2f(gm->getSpritesScaleFactor().x, 
+    gm->getSpritesScaleFactor().y));
 
   m_sprite.setPosition(sf::Vector2f(m_position.x, m_position.y));
 }
