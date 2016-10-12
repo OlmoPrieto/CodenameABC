@@ -46,12 +46,33 @@ Vector2D Ball::getPosition() const {
   return m_position;
 }
 
+Vector2D Ball::getVelocity() const {
+  return m_velocity;
+}
+
 uint32 Ball::getWidth() const {
   return (m_sprite.getGlobalBounds().width);
 }
 
 uint32 Ball::getHeight() const {
   return (m_sprite.getGlobalBounds().height);
+}
+
+void Ball::setVelocity(const Vector2D &velocity) {
+  m_velocity = velocity;
+}
+
+void Ball::setVelocity(float xDir, float yDir) {
+  m_velocity.x = xDir;
+  m_velocity.y = yDir;
+}
+
+void Ball::setXVelocity(float xDir) {
+  m_velocity.x = xDir;
+}
+
+void Ball::setYVelocity(float yDir) {
+  m_velocity.y = yDir;
 }
 
 void Ball::update(float dt) {
@@ -76,8 +97,7 @@ void Ball::update(float dt) {
 
       if (collided == true) {
         bounced = true;
-        m_velocity = m_velocity * -1.0f;
-        //m_velocity.y *= -1.0f;
+        //m_velocity = m_velocity * -1.0f;
       }
     }
   }
@@ -102,4 +122,16 @@ void Ball::update(float dt) {
 
 void Ball::draw() {
   m_windowRef->draw(m_sprite);
+}
+
+void Ball::invertVelocity() {
+  m_velocity = m_velocity * -1.0f;
+}
+
+void Ball::invertXVelocity() {
+  m_velocity.x *= -1.0f;
+}
+
+void Ball::invertYVelocity() {
+  m_velocity.y *= -1.0f;
 }

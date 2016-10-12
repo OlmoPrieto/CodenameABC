@@ -12,7 +12,7 @@
 
 *.bat
 genie.exe
-project_settings.lua
+#project_settings.lua
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs

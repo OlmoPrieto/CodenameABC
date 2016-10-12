@@ -18,14 +18,23 @@ public:
   ~Ball();
 
   Vector2D getPosition() const;
+  Vector2D getVelocity() const;
   uint32 getWidth() const;
   uint32 getHeight() const;
 
   void update(float dt);
   void draw();  // Get ref to window
+  
+  void invertVelocity();
+  void invertXVelocity();
+  void invertYVelocity();
 
 private:
   Ball();
+  void setVelocity(const Vector2D &velocity);
+  void setVelocity(float xDir, float yDir);
+  void setXVelocity(float xDir);
+  void setYVelocity(float yDir);
 
   float m_speed;
   sf::RenderWindow *m_windowRef;

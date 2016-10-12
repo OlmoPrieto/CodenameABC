@@ -52,8 +52,43 @@ uint32 Paddle::getHeight() const {
 bool Paddle::checkCollision(Ball *ball) {
   Vector2D ballPos = ball->getPosition();
 
-  return (ballPos.x + ball->getWidth() > m_position.x && ballPos.x < m_position.x + m_sprite.getGlobalBounds().width
-    && ballPos.y + ball->getHeight() > m_position.y && ballPos.y < m_position.y + m_sprite.getGlobalBounds().height);
+  bool collided = false;
+
+  if (ballPos.x + ball->getWidth() > m_position.x && ballPos.x < m_position.x + m_sprite.getGlobalBounds().width
+    && ballPos.y + ball->getHeight() > m_position.y && ballPos.y < m_position.y + m_sprite.getGlobalBounds().height) {
+    collided = true;
+
+    uint32 ballXPosition = (uint32)(ballPos.x);
+    Vector2D ballVelocity = ball->getVelocity();
+
+    /* CAREFUL */
+    //m_position.x += m_halfWidth;
+
+    if (ballXPosition > (uint32)(m_position.x)  // left side of the paddle minus 10% of total's width
+      && ballXPosition < (uint32)(m_position.x + (m_halfWidth - m_halfWidth * 0.2f))) {
+      printf("left\n");
+      if (ballVelocity.x < 0.0f) {
+        ball->invertYVelocity();
+      } else if (ballVelocity.x > 0.0f) {
+        ball->invertVelocity();
+      }
+    } else if (ballXPosition > (uint32)(m_position.x + (m_halfWidth - m_halfWidth * 0.2f))
+      && ballXPosition < (uint32)(m_position.x + (m_halfWidth + m_halfWidth * 0.2f))) {
+      printf("center\n");
+    } else {
+      printf("right\n");
+      if (ballVelocity.x < 0.0f) {
+        ball->invertVelocity();
+      } else if (ballVelocity.x > 0.0f) {
+        ball->invertYVelocity();
+      }
+    }
+  }
+
+  /* CAREFUL */
+  //m_position.x -= m_halfWidth;
+
+  return collided;
 }
 
 void Paddle::update(float dt) {
