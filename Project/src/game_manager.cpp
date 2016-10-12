@@ -10,6 +10,7 @@ GameManager::GameManager() {
   m_windowRef = nullptr;
   m_paddleRef = nullptr;
   m_ballRef = nullptr;
+  m_brickSetRef = nullptr;
   m_spritesScaleFactor = Vector2D(1.5f, 1.5f);
 }
 
@@ -39,6 +40,10 @@ void GameManager::setBallRef(Ball *ball) {
   m_ballRef = ball;
 }
 
+void GameManager::setBrickSetRef(BrickSet *brickSet) {
+  m_brickSetRef = brickSet;
+}
+
 sf::RenderWindow* GameManager::getWindowRef() const {
   return m_windowRef;
 }
@@ -49,6 +54,10 @@ Paddle* GameManager::getPaddleRef() const {
 
 Ball* GameManager::getBallRef() const {
   return m_ballRef;
+}
+
+BrickSet* GameManager::getBrickSetRef() const {
+  return m_brickSetRef;
 }
 
 uint32 GameManager::getWindowWidth() const {

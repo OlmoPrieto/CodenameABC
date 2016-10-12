@@ -68,3 +68,31 @@ void BrickSet::draw() {
     }
   }
 }
+
+bool BrickSet::checkCollisions(Ball *ball) {
+  Vector2D bSize(ball->getWidth(), ball->getHeight());
+  Vector2D bPos(ball->getPosition());
+
+  bool collided = false;
+  char *ptr = m_brickMatrix;
+
+  for (uint32 i = 0; i < m_verticalBrickAmount; i++) {
+    for (uint32 j = 0; j < m_horizontalBrickAmount; j++) {
+      if (*ptr != 0) {
+        if (bPos.x + bSize.x > (j * m_brickWidth) && bPos.x < (j * m_brickWidth + m_brickWidth)
+          && bPos.y + bSize.y > (i * m_brickHeight) && bPos.y < (i * m_brickHeight + m_brickHeight)) {
+          collided = true;
+
+          *ptr = 0;
+
+          return collided;
+        }
+      }
+
+      ptr++;
+    }
+  }
+
+
+  return collided;
+}

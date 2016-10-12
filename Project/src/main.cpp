@@ -17,13 +17,14 @@ int main() {
   c.start();
   float currentTime = 0.0f;
 
-  Ball ball(Vector2D(300.0f, 300.0f), Vector2D(0.5f, 0.5f), 200.0f);
+  Ball ball(Vector2D(300.0f, 600.0f), Vector2D(0.5f, 0.5f), 200.0f);
   Paddle paddle;
-
+  
   GameManager::getInstance()->setBallRef(&ball);
   GameManager::getInstance()->setPaddleRef(&paddle);
-
-  BrickSet b;
+  
+  BrickSet brickSet;
+  GameManager::getInstance()->setBrickSetRef(&brickSet);
 
   while (window.isOpen()) {
     sf::Event e;
@@ -45,7 +46,7 @@ int main() {
     ball.update(dt);
     ball.draw();
 
-    b.draw();
+    brickSet.draw();
 
     //printf("%f\n", auxTime - currentTime);
     currentTime = auxTime;

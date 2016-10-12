@@ -1,6 +1,7 @@
 #ifndef __BRICK_SET_H__
 #define __BRICK_SET_H__
 
+#include "ball.h"
 #include "vectors.h"
 
 #include <SFML/Graphics/RenderWindow.hpp>
@@ -14,6 +15,8 @@ public:
   ~BrickSet();
 
   void draw();
+
+  bool checkCollisions(Ball *ball);
 
 private:
   uint32 m_minSpawnHeight;

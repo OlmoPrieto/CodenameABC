@@ -61,13 +61,24 @@ void Ball::update(float dt) {
   m_position = m_position + (m_velocity * m_speed * dt);
 
   bool bounced = false;
-  if (m_position.y > paddle->getYPos() - paddle->getHeight() * 2) {
-    bool collided = paddle->checkCollision(this);
 
+  {
+    bool collided = GameManager::getInstance()->getBrickSetRef()->checkCollisions(this);
     if (collided == true) {
       bounced = true;
-      m_velocity = m_velocity * -1.0f;
-      //m_velocity.y *= -1.0f;
+      m_velocity.y *= -1.0f;
+    }
+  }
+
+  if (m_velocity.y > 0.0f) {  // only check when the ball is going down
+    if (m_position.y > paddle->getYPos() - paddle->getHeight() * 2) {
+      bool collided = paddle->checkCollision(this);
+
+      if (collided == true) {
+        bounced = true;
+        m_velocity = m_velocity * -1.0f;
+        //m_velocity.y *= -1.0f;
+      }
     }
   }
 
