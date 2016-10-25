@@ -2,6 +2,7 @@
 
 #include <SFML/Window/Mouse.hpp>
 
+#include <ctime>
 #include <iostream>
 
 GameManager* GameManager::m_instance = nullptr;
@@ -12,6 +13,8 @@ GameManager::GameManager() {
   m_ballRef = nullptr;
   m_brickSetRef = nullptr;
   m_spritesScaleFactor = Vector2D(1.5f, 1.5f);
+
+  srand(time(NULL));
 }
 
 GameManager::~GameManager() {

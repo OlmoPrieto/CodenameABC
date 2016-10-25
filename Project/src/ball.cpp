@@ -7,14 +7,15 @@
 #include <iostream>
 
 Ball::Ball() {
-  m_speed = 0.0f;
-  m_windowRef = nullptr;
-  m_paddleRef = nullptr;
+  
 }
 
 Ball::Ball(const Vector2D &position, 
   const Vector2D &velocity, float speed) {
-  Ball();
+  m_numBounces = 0;
+  m_speed = 0.0f;
+  m_windowRef = nullptr;
+  m_paddleRef = nullptr;
   
   GameManager *gm = GameManager::getInstance();
 
@@ -58,6 +59,10 @@ uint32 Ball::getHeight() const {
   return (m_sprite.getGlobalBounds().height);
 }
 
+uint32 Ball::getNumBounces() const {
+  return m_numBounces;
+}
+
 void Ball::setVelocity(const Vector2D &velocity) {
   m_velocity = velocity;
 }
@@ -87,7 +92,7 @@ void Ball::update(float dt) {
     bool collided = GameManager::getInstance()->getBrickSetRef()->checkCollisions(this);
     if (collided == true) {
       bounced = true;
-      m_velocity.y *= -1.0f;
+      //m_velocity.y *= -1.0f;
     }
   }
 
@@ -105,16 +110,18 @@ void Ball::update(float dt) {
   sf::Vector2u windowSize = m_windowRef->getSize();
   if (m_position.x > (windowSize.x - m_sprite.getGlobalBounds().width) || m_position.x < 0.0f) {
     m_velocity.x *= -1.0f;
-    //bounced = true;
+    bounced = true;
   }
   if (m_position.y >(windowSize.y - m_sprite.getGlobalBounds().height) || m_position.y < 0.0f) {
     m_velocity.y *= -1.0f;
-    //bounced = true;
+    bounced = true;
   }
 
   if (bounced == true) {
+    m_numBounces++;
+    printf("Bounced: %u\n", m_numBounces);
     m_position = lastPosition;
-    m_speed *= 1.005f;  // this increases speed when bouncing in ANY case, change this
+    //m_speed *= 1.005f;  // this increases speed when bouncing in ANY case, CHANGE THIS
   }
 
   m_sprite.setPosition(sf::Vector2f(m_position.x, m_position.y));

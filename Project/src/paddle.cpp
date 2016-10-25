@@ -75,6 +75,7 @@ bool Paddle::checkCollision(Ball *ball) {
     } else if (ballXPosition > (uint32)(m_position.x + (m_halfWidth - m_halfWidth * 0.2f))
       && ballXPosition < (uint32)(m_position.x + (m_halfWidth + m_halfWidth * 0.2f))) {
       printf("center\n");
+      ball->invertYVelocity();
     } else {
       printf("right\n");
       if (ballVelocity.x < 0.0f) {

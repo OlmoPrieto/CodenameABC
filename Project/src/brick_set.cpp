@@ -79,11 +79,79 @@ bool BrickSet::checkCollisions(Ball *ball) {
   for (uint32 i = 0; i < m_verticalBrickAmount; i++) {
     for (uint32 j = 0; j < m_horizontalBrickAmount; j++) {
       if (*ptr != 0) {
-        if (bPos.x + bSize.x > (j * m_brickWidth) && bPos.x < (j * m_brickWidth + m_brickWidth)
-          && bPos.y + bSize.y > (i * m_brickHeight) && bPos.y < (i * m_brickHeight + m_brickHeight)) {
+        Vector2D brickPos(j * m_brickWidth, i * m_brickHeight);
+
+        if (bPos.x + bSize.x > (brickPos.x) && bPos.x < (brickPos.x + m_brickWidth)
+          && bPos.y + bSize.y > (brickPos.y) && bPos.y < (brickPos.y + m_brickHeight)) {
           collided = true;
 
           *ptr = 0;
+
+          Vector2D ballCenter(bPos.x + bSize.x / 2.0f, bPos.y + bSize.y / 2.0f);
+
+          bool atLeft = false;
+          bool atTop = false;
+          bool atRight = false;
+          bool atBottom = false;
+
+          if (ballCenter.x < brickPos.x) {
+            atLeft = true;
+          }
+          if (ballCenter.y < brickPos.y) {
+            atTop = true;
+          }
+          if (ballCenter.x > brickPos.x + m_brickWidth) {
+            atRight = true;
+          }
+          if (ballCenter.y > brickPos.y + m_brickHeight) {
+            atBottom = true;
+          }
+          
+          bool aside = false;
+          bool upDown = false;
+
+          if (atLeft == true) {
+            // collided with left side
+            // in between left side bounds
+            if (bPos.y + bSize.y > brickPos.y || bPos.y < brickPos.y + m_brickHeight) {
+              aside = true;
+            }
+
+            //aside = true;
+          } else if (atRight == true) {
+            // collided with right side
+
+            if (bPos.y + bSize.y > brickPos.y || bPos.y < brickPos.y + m_brickHeight) {
+              aside = true;
+            }
+
+            //aside = true;
+          } else if (atTop == true) {
+            // collided with top
+
+            if (bPos.x + bSize.x > brickPos.x || bPos.x < brickPos.x + m_brickWidth) {
+              upDown = true;
+            }
+
+            //upDown = true;
+          } else if (atBottom == true) {
+            // collided with bottom
+            
+            if (bPos.x + bSize.x > brickPos.x || bPos.x < brickPos.x + m_brickWidth) {
+              upDown = true;
+            }
+            
+            //upDown = true;
+          } else {
+            printf("\nups\n");
+            ball->invertVelocity();
+          }
+
+          if (aside == true) {
+            ball->invertXVelocity();
+          } else if (upDown == true) {
+            ball->invertYVelocity();
+          }
 
           return collided;
         }

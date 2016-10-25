@@ -17,7 +17,7 @@ int main() {
   c.start();
   float currentTime = 0.0f;
 
-  Ball ball(Vector2D(300.0f, 600.0f), Vector2D(0.5f, 0.5f), 200.0f);
+  Ball ball(Vector2D(300.0f, 600.0f), Vector2D(0.5f, 0.5f), 350.0f);
   Paddle paddle;
   
   GameManager::getInstance()->setBallRef(&ball);
