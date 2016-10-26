@@ -8,7 +8,7 @@ BrickSet::BrickSet() {
   m_brickMatrix = nullptr;
 
   sf::Image image;
-  bool success = image.loadFromFile("resources/brick_demo.png");
+  bool success = image.loadFromFile("resources/brick_demo2.png");
 
   assert(success == true && "Failed to load brick texture");
 
@@ -35,7 +35,7 @@ BrickSet::BrickSet() {
   char *ptr = m_brickMatrix;
   for (uint32 i = 0; i < m_verticalBrickAmount; i++) {
     for (uint32 j = 0; j < m_horizontalBrickAmount; j++) {
-      if (i < 16) {
+      if (i < 12) {
         *ptr = 1;
       } else {
         *ptr = 0;
@@ -113,25 +113,25 @@ bool BrickSet::checkCollisions(Ball *ball) {
           if (atLeft == true) {
             // collided with left side
             // in between left side bounds
-            if (bPos.y + bSize.y > brickPos.y || bPos.y < brickPos.y + m_brickHeight) {
+            if (bPos.y + bSize.y > brickPos.y && bPos.y < brickPos.y + m_brickHeight) {
               aside = true;
             }
           } else if (atRight == true) {
             // collided with right side
-            if (bPos.y + bSize.y > brickPos.y || bPos.y < brickPos.y + m_brickHeight) {
+            if (bPos.y + bSize.y > brickPos.y && bPos.y < brickPos.y + m_brickHeight) {
               aside = true;
             }
           } else if (atTop == true) {
             // collided with top
-            if (bPos.x + bSize.x > brickPos.x || bPos.x < brickPos.x + m_brickWidth) {
+            if (bPos.x + bSize.x > brickPos.x && bPos.x < brickPos.x + m_brickWidth) {
               upDown = true;
             }
           } else if (atBottom == true) {
             // collided with bottom
-            if (bPos.x + bSize.x > brickPos.x || bPos.x < brickPos.x + m_brickWidth) {
+            if (bPos.x + bSize.x > brickPos.x && bPos.x < brickPos.x + m_brickWidth) {
               upDown = true;
             }
-          } else {
+          } else {  // only in full diagonal
             printf("\nups\n");
             ball->invertVelocity();
           }

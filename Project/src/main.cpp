@@ -9,7 +9,7 @@
 #include "paddle.h"
 
 int main() {
-  sf::RenderWindow window(sf::VideoMode(640, 720), "WINDOW");
+  sf::RenderWindow window(sf::VideoMode(648, 720), "WINDOW");
   
   GameManager::getInstance()->setWindowRef(&window);
 
@@ -17,7 +17,7 @@ int main() {
   c.start();
   float currentTime = 0.0f;
 
-  Ball ball(Vector2D(300.0f, 425.0f), Vector2D(-0.25f, 0.75f), 350.0f);
+  Ball ball(Vector2D(300.0f, 450.0f), Vector2D(-0.25f, 0.75f), 350.0f);
   Paddle paddle;
   
   GameManager::getInstance()->setBallRef(&ball);

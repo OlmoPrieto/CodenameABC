@@ -92,7 +92,7 @@ void Ball::update(float dt) {
     bool collided = GameManager::getInstance()->getBrickSetRef()->checkCollisions(this);
     if (collided == true) {
       bounced = true;
-      //m_velocity.y *= -1.0f;
+      m_speed *= 1.0075f;
     }
   }
 
@@ -102,7 +102,7 @@ void Ball::update(float dt) {
 
       if (collided == true) {
         bounced = true;
-        //m_velocity = m_velocity * -1.0f;
+        m_speed *= 1.0025f;
       }
     }
   }
@@ -119,9 +119,7 @@ void Ball::update(float dt) {
 
   if (bounced == true) {
     m_numBounces++;
-    //printf("Bounced: %u\n", m_numBounces);
     m_position = lastPosition;
-    //m_speed *= 1.005f;  // this increases speed when bouncing in ANY case, CHANGE THIS
   }
 
   m_sprite.setPosition(sf::Vector2f(m_position.x, m_position.y));
