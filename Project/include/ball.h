@@ -24,8 +24,8 @@ public:
 
   Vector2D getPosition() const;
   Vector2D getVelocity() const;
-  uint32 getWidth() const;
-  uint32 getHeight() const;
+  float getWidth() const;
+  float getHeight() const;
   uint32 getNumBounces() const;
 
   void update(float dt);

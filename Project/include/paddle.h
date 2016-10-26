@@ -17,8 +17,8 @@ public:
   ~Paddle();
 
   float getYPos() const;
-  uint32 getWidth() const;
-  uint32 getHeight() const;
+  float getWidth() const;
+  float getHeight() const;
 
   bool checkCollision(Ball *ball);
 

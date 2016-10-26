@@ -41,11 +41,11 @@ float Paddle::getYPos() const {
   return m_yPos;
 }
 
-uint32 Paddle::getWidth() const {
+float Paddle::getWidth() const {
   return (m_sprite.getGlobalBounds().width);
 }
 
-uint32 Paddle::getHeight() const {
+float Paddle::getHeight() const {
   return (m_sprite.getGlobalBounds().height);
 }
 
@@ -57,37 +57,25 @@ bool Paddle::checkCollision(Ball *ball) {
   if (ballPos.x + ball->getWidth() > m_position.x && ballPos.x < m_position.x + m_sprite.getGlobalBounds().width
     && ballPos.y + ball->getHeight() > m_position.y && ballPos.y < m_position.y + m_sprite.getGlobalBounds().height) {
     collided = true;
+    
+    float paddleCenterX = m_position.x + m_halfWidth;
+    uint32 ballXPosition = (uint32)(ballPos.x + (ball->getWidth() / 2.0f));
+    Vector2D ballVelocity(ball->getVelocity());
+    Vector2D newBallVelocity;
 
-    uint32 ballXPosition = (uint32)(ballPos.x);
-    Vector2D ballVelocity = ball->getVelocity();
+    float percentage = abs(((float)(ballXPosition) - paddleCenterX)) / (uint32)(m_halfWidth);
+    printf("percentage: %f\n", percentage);
 
-    /* CAREFUL */
-    //m_position.x += m_halfWidth;
-
-    if (ballXPosition > (uint32)(m_position.x)  // left side of the paddle minus 10% of total's width
-      && ballXPosition < (uint32)(m_position.x + (m_halfWidth - m_halfWidth * 0.2f))) {
-      printf("left\n");
-      if (ballVelocity.x < 0.0f) {
-        ball->invertYVelocity();
-      } else if (ballVelocity.x > 0.0f) {
-        ball->invertVelocity();
-      }
-    } else if (ballXPosition > (uint32)(m_position.x + (m_halfWidth - m_halfWidth * 0.2f))
-      && ballXPosition < (uint32)(m_position.x + (m_halfWidth + m_halfWidth * 0.2f))) {
-      printf("center\n");
-      ball->invertYVelocity();
-    } else {
-      printf("right\n");
-      if (ballVelocity.x < 0.0f) {
-        ball->invertVelocity();
-      } else if (ballVelocity.x > 0.0f) {
-        ball->invertYVelocity();
-      }
+    newBallVelocity.y = (1.0f - percentage) * -1.0f;
+    newBallVelocity.x = percentage;
+    if (ballXPosition < (uint32)(paddleCenterX)) {
+      newBallVelocity.x *= -1.0f;
+    } else if (ballXPosition > (uint32)(paddleCenterX)) {
+      
     }
-  }
 
-  /* CAREFUL */
-  //m_position.x -= m_halfWidth;
+    ball->setVelocity(newBallVelocity);
+  }
 
   return collided;
 }

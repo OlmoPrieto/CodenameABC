@@ -116,32 +116,21 @@ bool BrickSet::checkCollisions(Ball *ball) {
             if (bPos.y + bSize.y > brickPos.y || bPos.y < brickPos.y + m_brickHeight) {
               aside = true;
             }
-
-            //aside = true;
           } else if (atRight == true) {
             // collided with right side
-
             if (bPos.y + bSize.y > brickPos.y || bPos.y < brickPos.y + m_brickHeight) {
               aside = true;
             }
-
-            //aside = true;
           } else if (atTop == true) {
             // collided with top
-
             if (bPos.x + bSize.x > brickPos.x || bPos.x < brickPos.x + m_brickWidth) {
               upDown = true;
             }
-
-            //upDown = true;
           } else if (atBottom == true) {
             // collided with bottom
-            
             if (bPos.x + bSize.x > brickPos.x || bPos.x < brickPos.x + m_brickWidth) {
               upDown = true;
             }
-            
-            //upDown = true;
           } else {
             printf("\nups\n");
             ball->invertVelocity();

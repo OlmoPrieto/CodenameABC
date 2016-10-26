@@ -51,11 +51,11 @@ Vector2D Ball::getVelocity() const {
   return m_velocity;
 }
 
-uint32 Ball::getWidth() const {
+float Ball::getWidth() const {
   return (m_sprite.getGlobalBounds().width);
 }
 
-uint32 Ball::getHeight() const {
+float Ball::getHeight() const {
   return (m_sprite.getGlobalBounds().height);
 }
 
@@ -119,7 +119,7 @@ void Ball::update(float dt) {
 
   if (bounced == true) {
     m_numBounces++;
-    printf("Bounced: %u\n", m_numBounces);
+    //printf("Bounced: %u\n", m_numBounces);
     m_position = lastPosition;
     //m_speed *= 1.005f;  // this increases speed when bouncing in ANY case, CHANGE THIS
   }
