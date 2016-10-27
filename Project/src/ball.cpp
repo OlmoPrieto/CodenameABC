@@ -92,7 +92,7 @@ void Ball::update(float dt) {
     bool collided = GameManager::getInstance()->getBrickSetRef()->checkCollisions(this);
     if (collided == true) {
       bounced = true;
-      m_speed *= 1.0075f;
+      m_speed *= 1.01f;
     }
   }
 
@@ -102,7 +102,7 @@ void Ball::update(float dt) {
 
       if (collided == true) {
         bounced = true;
-        m_speed *= 1.0025f;
+        m_speed *= 1.0075f;
       }
     }
   }

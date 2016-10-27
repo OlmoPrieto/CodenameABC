@@ -65,9 +65,13 @@ bool Paddle::checkCollision(Ball *ball) {
 
     float percentage = abs(((float)(ballXPosition) - paddleCenterX)) / (uint32)(m_halfWidth);
     printf("percentage: %f\n", percentage);
-
+    if (percentage > 0.75f) {
+      percentage = 0.75f;
+    }
+    
     newBallVelocity.y = (1.0f - percentage) * -1.0f;
     newBallVelocity.x = percentage;
+    
     if (ballXPosition < (uint32)(paddleCenterX)) {
       newBallVelocity.x *= -1.0f;
     } else if (ballXPosition > (uint32)(paddleCenterX)) {

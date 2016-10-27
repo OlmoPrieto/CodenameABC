@@ -35,12 +35,16 @@ BrickSet::BrickSet() {
   char *ptr = m_brickMatrix;
   for (uint32 i = 0; i < m_verticalBrickAmount; i++) {
     for (uint32 j = 0; j < m_horizontalBrickAmount; j++) {
-      if (i < 12) {
+      uint32 aux = j + m_horizontalBrickAmount * i;
+
+      if (aux % 2 == 0 && i < 12) {
+        *ptr = 1;
+      /*if (i < 12) {
         *ptr = 1;
       } else {
         *ptr = 0;
-      }
-
+      }*/
+      } else *ptr = 0;
       ptr++;
     }
   }
