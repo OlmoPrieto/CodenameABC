@@ -56,7 +56,7 @@ bool Paddle::checkCollision(Ball *ball) {
 
   if (ballPos.x + ball->getWidth() > m_position.x && ballPos.x < m_position.x + m_sprite.getGlobalBounds().width
     && ballPos.y + ball->getHeight() > m_position.y && ballPos.y < m_position.y + m_sprite.getGlobalBounds().height) {
-    collided = true;
+    collided = true;  // !!
     
     float paddleCenterX = m_position.x + m_halfWidth;
     uint32 ballXPosition = (uint32)(ballPos.x + (ball->getWidth() / 2.0f));
@@ -75,7 +75,7 @@ bool Paddle::checkCollision(Ball *ball) {
     if (ballXPosition < (uint32)(paddleCenterX)) {
       newBallVelocity.x *= -1.0f;
     } else if (ballXPosition > (uint32)(paddleCenterX)) {
-      
+      // keep this for if using the center of the paddle
     }
 
     ball->setVelocity(newBallVelocity);
